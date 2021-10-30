@@ -14,7 +14,7 @@ public class queryGenerator {
 
     public static void generateQuery(String queryTable, String queryColumns, String queryColumnTypes, String queryColumnRanges, Integer rows, String dotSqlFile, Boolean replacesData) {
 
-        boolean printsQueries = true;
+        boolean printsQueries = false;
 
         filePrinter sqlFile = new filePrinter(dotSqlFile);
 
@@ -93,7 +93,7 @@ public class queryGenerator {
         return randomValue;
 
     }
-    //System.out.println(queryGenerator.randomDate("10/15/2005to10/15/2021:mm/yyyy/dd"));
+
     private static String randomDate(String dateRange){
 
         List<String> beginRange0EndRange1= deserialize(dateRange,"to");
@@ -177,27 +177,27 @@ public class queryGenerator {
     private static String randomNameGenerator(int length) {
 
         List<String> seeds = new ArrayList<>();
-        seeds.add("augustus");
-        seeds.add("tiberius");
-        seeds.add("caligula");
-        seeds.add("claudius");
-        seeds.add("nero");
-        seeds.add("galba");
-        seeds.add("otho");
+        seeds.add("lorem");
+        seeds.add("ipsum");
+        seeds.add("dolor");
+        seeds.add("sit");
+        seeds.add("amet");
+        seeds.add("consectetur");
+        seeds.add("elit");
         seeds.add("aulus");
-        seeds.add("vespasian");
-        seeds.add("titus");
-        seeds.add("domitian");
-        seeds.add("nerva");
-        seeds.add("trajan");
-        seeds.add("hadrian");
-        seeds.add("marcus");
-        seeds.add("lucius");
-        seeds.add("commodus");
-        seeds.add("publius");
-        seeds.add("caracalla");
-        seeds.add("macrinus");
-        seeds.add("gordian");
+        seeds.add("sed");
+        seeds.add("tempor");
+        seeds.add("do");
+        seeds.add("ut");
+        seeds.add("magna");
+        seeds.add("aliqua");
+        seeds.add("enim");
+        seeds.add("omnis");
+        seeds.add("nemo");
+        seeds.add("qui");
+        seeds.add("minima");
+        seeds.add("ullam");
+        seeds.add("modi");
 
         String randomName = "";
 

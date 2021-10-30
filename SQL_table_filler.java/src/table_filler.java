@@ -5,13 +5,13 @@ public class table_filler{
     public static void main(String[] args) {
 
         //MODIFY THIS
-        String dotSqlFile ="account_dummy_data.sql";
+        String dotSqlFile ="change_this_output_file.sql";
         boolean replacesData = true;
 
         String Table = "account"; //insert into this table
         String Columns ="username,first_name,last_name,birthday,favorite_number"; //in these columns
-        String ColumnTypes ="word,word,word,date,number";
-        String ColumnRanges ="12,12,12,01/01/1935to12/31/2003,1to100:#";
+        String ColumnTypes ="word,word,bool,date,number,number";
+        String ColumnRanges ="5,15,tf,01/01/1935to12/31/2003,1to100:#,-2147483648000to2147483648000";
 
         //ColumnRanges formatting guide
         //word = length
@@ -19,7 +19,7 @@ public class table_filler{
         //bool = tf, t,f
         //date = any format date range like MM/DD/YYYYtoMM/DD/YYYY
 
-        Integer numberOfRows = 200; //Took my machine ~ 30s to fill 200k queries
+        Integer numberOfRows = 3;
 
         queryGenerator.generateQuery(Table,Columns,ColumnTypes,ColumnRanges,numberOfRows,dotSqlFile,replacesData);
 
