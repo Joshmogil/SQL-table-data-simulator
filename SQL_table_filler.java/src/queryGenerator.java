@@ -7,7 +7,6 @@ import java.util.Locale;
 
 public class queryGenerator {
 
-
     public queryGenerator() {
 
     }
@@ -80,9 +79,14 @@ public class queryGenerator {
 
         }
 
-        else if(columnType.equalsIgnoreCase("date")){
+        else if(columnType.equalsIgnoreCase("date")) {
 
             randomValue = randomDate(columnRange);
+
+
+        }else if(columnType.equalsIgnoreCase("time")){
+
+                randomValue = randomTime(columnRange);
 
 
         }else{
@@ -91,6 +95,91 @@ public class queryGenerator {
         }
 
         return randomValue;
+
+    }
+
+    public static String randomTime(String timeRange){
+        //takes in form of 11:11:00to17:00:01/hmsAM
+
+        List<String> beginRange0EndRangeAndForm1= deserialize(timeRange,"to");
+
+        String time1 = beginRange0EndRangeAndForm1.get(0);
+
+        String timeForm = beginRange0EndRangeAndForm1.get(1);
+
+        List<String> endRange0Form1= deserialize(timeForm,"/");
+
+        String time2 = endRange0Form1.get(0);
+
+
+
+
+        List<String> time1Deser =deserialize(time1,":");
+        List<String> time2Deser =deserialize(time2,":");
+
+        List<Integer> timeListIntegerMin =  new ArrayList<>();
+        List<Integer> timeListIntegerMax =  new ArrayList<>();
+
+        for(String s : time1Deser)timeListIntegerMin.add(Integer.valueOf(s));
+        for(String s : time2Deser)timeListIntegerMax.add(Integer.valueOf(s));
+
+        long minTimeCode = timeListIntegerMin.get(0)*60*60 + timeListIntegerMin.get(1)*60 + timeListIntegerMin.get(2);
+        long maxTimeCode = timeListIntegerMax.get(0)*60*60 + timeListIntegerMax.get(1)*60 + timeListIntegerMax.get(2);
+
+        int randomTimeCode = Integer.parseInt(randomNumberGenerator((String.valueOf(minTimeCode)),(String.valueOf(maxTimeCode))));
+
+        int hours = (randomTimeCode/(60*60));
+        randomTimeCode-= hours*60*60;
+        int minutes = (randomTimeCode/(60));
+        randomTimeCode-= minutes*60;
+        int seconds = randomTimeCode;
+
+        String amOrPm ="";
+        if(timeRange.toUpperCase().contains("PM")||timeRange.toUpperCase().contains("AM")){
+            if(hours>11){
+                amOrPm = "pm";
+            }else{
+                amOrPm ="am";
+            }
+
+            if (hours>12) {
+                hours = hours % 12;
+            }
+        }
+
+        String hoursf = String.valueOf(hours);
+        String minutesf = String.valueOf(minutes);
+        String secondsf = String.valueOf(seconds);
+
+        if (hoursf.length()==1){
+            hoursf = "0"+ hoursf;
+        }
+        if (minutesf.length()==1){
+            minutesf = "0"+ minutesf;
+        }
+        if (secondsf.length()==1){
+            secondsf = "0"+ secondsf;
+        }
+
+        //HMS detector
+        String timeOut ="";
+        if(timeRange.toUpperCase().contains("H")){
+            timeOut+=hoursf+":";
+        }
+        if(timeRange.toUpperCase().contains("M")){
+            timeOut+=minutesf+":";
+        }
+        if(timeRange.toUpperCase().contains("S")){
+            timeOut+=secondsf+":";
+        }
+
+        timeOut = timeOut.substring(0,timeOut.length()-1);
+
+        if(amOrPm=="") {
+            return timeOut;
+        }else{
+            return timeOut+amOrPm;
+        }
 
     }
 
@@ -111,7 +200,6 @@ public class queryGenerator {
         return randDatePos1 + "/" + randDatePos2 + "/" + randDatePos3;
 
     }
-
 
     private static String trueOrFalse(String tOrfOrtf){
 
@@ -139,7 +227,7 @@ public class queryGenerator {
         List<String> formatAndC2 = new ArrayList<>();
 
         try {
-            formatAndC2 = Arrays.asList(components.get(1).split(":"));
+            formatAndC2 = Arrays.asList(components.get(1).split("form"));
             format = formatAndC2.get(1);
         }catch(ArrayIndexOutOfBoundsException e){
 
