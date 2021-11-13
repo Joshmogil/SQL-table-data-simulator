@@ -14,12 +14,12 @@ public class table_filler{
 
         //MODIFY THIS
         String dotSqlFile ="change_this_output_file.sql";
-        boolean replacesData = true;
+        boolean replacesDataInTable = false;
 
         String Table1 = "account"; //insert into this table
-        String Columns1 ="username,first_name,last_name,birthday"; //in these columns
-        String ColumnTypes1 ="word,word,word,date";
-        String ColumnRanges1 ="10,12,12,01/01/1935to12/31/2003";
+        String Columns1 ="name,email,birthday,last_login,likes_ice_cream"; //in these columns
+        String ColumnTypes1 ="word,email,date,time,bool";
+        String ColumnRanges1 ="10,12,01/01/1935to12/31/2003,00:00:00to23:59:59/HMSpm,tf";
 
         //ColumnRanges formatting guide
         //word = length
@@ -27,10 +27,11 @@ public class table_filler{
         //bool = tf, t,f
         //date = any format date range like MM/DD/YYYYtoMM/DD/YYYY
         //time = time format like "00:00:00to23:59:59/HMSpm"
+        //email = email name length
 
-        Integer numberOfRows1 = 25;
+        Integer numberOfRows1 = 500;
 
-        queryGenerator.generateQuery(Table1,Columns1,ColumnTypes1,ColumnRanges1,numberOfRows1,dotSqlFile,replacesData);
+        queryGenerator.generateQuery(Table1,Columns1,ColumnTypes1,ColumnRanges1,numberOfRows1,dotSqlFile,replacesDataInTable);
 
 
 

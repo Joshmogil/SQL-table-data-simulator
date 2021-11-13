@@ -216,6 +216,27 @@ public class randBox {
 
     }
 
+    public String randomEmailGenerator(int length){
+        String emailName = randomNameGenerator(length);
+        String emailSuffix = "@gmail.com";
+        double fourSidedCoin = Math.random();
+
+        if (fourSidedCoin < .25){
+            emailSuffix = "@hotmail.com";
+        }
+        if (fourSidedCoin >= .25 && fourSidedCoin<.50){
+            emailSuffix = "@yahoo.com";
+        }
+        if (fourSidedCoin >= .50 && fourSidedCoin<.75){
+            emailSuffix = "@gmail.com";
+        }
+        if (fourSidedCoin >= .75 && fourSidedCoin<1.01){
+            emailSuffix = "@outlook.com";
+        }
+
+        return emailName + emailSuffix;
+    }
+
     public List<String> deserialize(String serializedString, String regex){
 
         return Arrays.asList(serializedString.split(regex));

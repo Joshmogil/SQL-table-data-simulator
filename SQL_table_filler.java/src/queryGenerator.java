@@ -27,10 +27,22 @@ public class queryGenerator {
             String rowData = buildRowData(queryColumnTypes,queryColumnRanges);
             sqlFile.writeQuery(table,columns,rowData);
 
+            if(i == 0 && rows <= 1000){
+                System.out.println("Writing to file ...");
+            }
+
+            if(i == 0 && rows >= 1000){
+                System.out.println("Writing to file ... this may take a second ...");
+            }
+
             if(printsQueries){
                 System.out.println("INSERT INTO " + table + " (" + columns+ ")");
                 System.out.println("VALUES (" + rowData.substring(0,rowData.length()-2) + ");");
                 System.out.println();
+            }
+            if(i==rows-1){
+                System.out.println();
+                System.out.println("Finished writing " +rows+" rows in file: "+ dotSqlFile + " to fill table called: "+ queryTable + "." );
             }
 
         }
@@ -86,6 +98,10 @@ public class queryGenerator {
         }else if(columnType.equalsIgnoreCase("time")){
 
                 randomValue = randBox1.randomTime(columnRange);
+
+        }else if(columnType.equalsIgnoreCase("email")){
+
+            randomValue = randBox1.randomEmailGenerator(Integer.parseInt(columnRange));
 
 
         }else{
